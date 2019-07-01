@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import styled from 'styled-components'
 
 const Item = styled.div`
@@ -12,13 +12,19 @@ const Item = styled.div`
     color: #333333;
 `;
 
-function TodoItem(props) {
-    return (
-        <Item>
-            <input type="checkbox" checked={props.item.completed}/>
-            <p>{props.item.text}</p>
-        </Item>
-    )
+class TodoItem extends Component {
+    render() {
+        return (
+            <Item>
+                <input
+                    type="checkbox"
+                    checked={this.props.item.completed}
+                    onChange={() => this.props.handleChange(this.props.item.id)}
+                />
+                <p>{this.props.item.text}</p>
+            </Item>
+        )
+    }
 }
 
 export default TodoItem

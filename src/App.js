@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import styled from 'styled-components'
 
 import TodoItem from './components/TodoItem'
@@ -14,42 +14,65 @@ const TodoList = styled.div`
     padding: 30px;
 `;
 
-const todoData = [
-    {
-        id: 1,
-        text: "Code this todo list",
-        completed: true
-    },
-    {
-        id: 2,
-        text: "Learn how to deploy react",
-        completed: false
-    },
-    {
-        id: 3,
-        text: "Sleep",
-        completed: false
-    },
-    {
-        id: 4,
-        text: "Push code to Github",
-        completed: true
-    },
-    {
-        id: 5,
-        text: "Create an actually useful app",
-        completed: false
-    },
-];
+class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            todos: [
+                {
+                    id: 1,
+                    text: "Code this todo list",
+                    completed: true
+                },
+                {
+                    id: 2,
+                    text: "Learn how to deploy react",
+                    completed: false
+                },
+                {
+                    id: 3,
+                    text: "Sleep",
+                    completed: false
+                },
+                {
+                    id: 4,
+                    text: "Push code to Github",
+                    completed: true
+                },
+                {
+                    id: 5,
+                    text: "Create an actually useful app",
+                    completed: false
+                },
+            ]
+        };
+        this.handleChange = this.handleChange.bind(this)
+    }
 
-function App() {
-    const todoItems = todoData.map(item => <TodoItem key={item.id} item={item}/>);
+    handleChange(id) {
+        this.setState(prevState => {
+            const updatedTodos = prevState.todos.map(todo => {
+                if (todo.id === id) {
+                    todo.completed = !todo.completed
+                }
+                return todo
+            });
+            return {
+                todos: updatedTodos
+            }
+        })
+    }
 
-    return (
-        <TodoList>
-            {todoItems}
-        </TodoList>
-    )
+    render() {
+        const todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item}
+                                                                 handleChange={this.handleChange}/>);
+
+        return (
+            <TodoList>
+                {todoItems}
+            </TodoList>
+        )
+    }
 }
 
 export default App
