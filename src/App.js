@@ -1,8 +1,7 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
-import TodoItem from './components/InputItem'
+import TodoItem from './components/TodoItem'
 
 const TodoList = styled.div`
     background-color: white;
@@ -15,12 +14,42 @@ const TodoList = styled.div`
     padding: 30px;
 `;
 
-ReactDOM.render(
-    <TodoList>
-        <TodoItem/>
-        <TodoItem/>
-        <TodoItem/>
-        <TodoItem/>
-    </TodoList>,
-    document.getElementById('root')
-);
+const todoData = [
+    {
+        id: 1,
+        text: "Code this todo list",
+        completed: true
+    },
+    {
+        id: 2,
+        text: "Learn how to deploy react",
+        completed: false
+    },
+    {
+        id: 3,
+        text: "Sleep",
+        completed: false
+    },
+    {
+        id: 4,
+        text: "Push code to Github",
+        completed: true
+    },
+    {
+        id: 5,
+        text: "Create an actually useful app",
+        completed: false
+    },
+];
+
+function App() {
+    const todoItems = todoData.map(item => <TodoItem key={item.id} item={item}/>);
+
+    return (
+        <TodoList>
+            {todoItems}
+        </TodoList>
+    )
+}
+
+export default App
