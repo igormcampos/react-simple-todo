@@ -14,6 +14,12 @@ const Item = styled.div`
 
 class TodoItem extends Component {
     render() {
+        const completedStyle = {
+            fontStyle: "italic",
+            color: "#cdcdcd",
+            textDecoration: "line-through"
+        };
+
         return (
             <Item>
                 <input
@@ -21,7 +27,7 @@ class TodoItem extends Component {
                     checked={this.props.item.completed}
                     onChange={() => this.props.handleChange(this.props.item.id)}
                 />
-                <p>{this.props.item.text}</p>
+                <p style={this.props.item.completed ? completedStyle : null}>{this.props.item.text}</p>
             </Item>
         )
     }
