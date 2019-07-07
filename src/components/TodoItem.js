@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 
 const Item = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 30px 20px 0;
-    width: 70%;
+    display: grid;
+    padding-top: 20px;
+    width: 100%;
     border-bottom: 1px solid #cecece;
     font-family: Roboto, sans-serif;
     color: #333333;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
 `;
 
 class TodoItem extends Component {
@@ -28,6 +28,10 @@ class TodoItem extends Component {
                     onChange={() => this.props.handleChange(this.props.item.id)}
                 />
                 <p style={this.props.item.completed ? completedStyle : null}>{this.props.item.text}</p>
+                <button onClick={() => {
+                    this.props.deleteItem(this.props.item.id)
+                }}>X
+                </button>
             </Item>
         )
     }
