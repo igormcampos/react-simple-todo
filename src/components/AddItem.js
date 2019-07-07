@@ -13,14 +13,17 @@ class AddItem extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addItem(this.state.text)
+        this.props.addItem(this.state.text);
+        this.setState({
+            text: ''
+        })
     };
 
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input id="text" type="text" onChange={this.handleChange}/>
+                    <input id="text" type="text" onChange={this.handleChange} value={this.state.text}/>
                     <button>+</button>
                 </form>
             </div>
