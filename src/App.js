@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 
 import TodoItem from './components/TodoItem'
-import { todoData } from './components/todoData'
+import {todoData} from './components/todoData'
+import AddItem from "./components/AddItem";
 
 const TodoList = styled.div`
     background-color: white;
@@ -38,11 +39,25 @@ class App extends Component {
         })
     }
 
+    addItem = (text) => {
+        const newItem = {
+            id: Math.random(),
+            text: text,
+            completed: false
+        };
+        let newList = [...this.state.todos, newItem];
+        this.setState({
+            todos: newList
+        })
+    };
+
     render() {
-        const list = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange}/>)
+        const list = this.state.todos.map(item => <TodoItem key={item.id} item={item}
+                                                            handleChange={this.handleChange}/>);
 
         return (
             <TodoList>
+                <AddItem addItem={this.addItem}/>
                 {list}
             </TodoList>
         )
